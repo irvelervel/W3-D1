@@ -294,3 +294,114 @@ const arrowSum = (n1, n2) => {
 
 // - unica differenza nel funzionamento: il diverso binding di alcune keywords, in particolare
 // la parola "this"
+
+// I NUOVI METODI DEGLI ARRAY INTRODOTTI DA ES6
+// metodi che già conosciamo:
+const arr = []
+arr.push(1) // aggiunge in fondo
+arr.pop() // elimina l'ultimo elemento
+arr.unshift(0) // aggiunge in cima
+arr.shift() // elimina il primo elemento
+arr.splice(0, 1) // alla tot posizione elimina tot elementi
+
+// i nuovi metodi si focalizzano sull'ITERAZIONE degli array
+
+const namesArray = ['Pupo', 'Gianni Morandi', 'Elisa', 'Claudio Baglioni']
+
+for (let i = 0; i < namesArray.length; i++) {
+  i // da 0 a 3
+  namesArray[i] // da 'Pupo' a 'Claudio Baglioni'
+}
+
+// i metodi di cui andiamo a parlare ora sono dei FOR "mascherati"
+
+// FOREACH
+// forEach itera tutti gli elementi di un array e permette di eseguire le stesse
+// operazioni su ognuno di essi
+namesArray.forEach((name) => {
+  // questo forEach è un ciclo for!
+  // quindi, qui dentro, ci finisco 4 volte!
+  console.log('DENTRO IL FOREACH', name)
+})
+
+for (let i = 0; i < namesArray.length; i++) {
+  console.log('DENTRO IL FOR', namesArray[i])
+}
+
+const objArray = [
+  {
+    brand: 'Fiat',
+    model: 'Punto',
+  },
+  {
+    brand: 'Volkswagen',
+    model: 'Bora',
+  },
+  {
+    brand: 'Toyota',
+    model: 'Yaris',
+  },
+]
+
+objArray.forEach((car, i) => {
+  console.log(car.model, i) // 'Punto', 'Bora', 'Yaris'
+})
+
+// anche con la struttura forEach è possibile utilizzare la i
+// magari per saltare un elemento o per fare cose diverse a seconda dell'indice raggiunto
+objArray.forEach((car, i) => {
+  if (i > 0) {
+    console.log(car.model, i) // 'Bora', 'Yaris'
+  }
+})
+
+// MAP
+// .map() TRASFORMA un array in un altro array!
+// la LUNGHEZZA dell'array risultante sarà sempre UGUALE alla lunghezza dell'array di partenza
+
+// trasformiamo l'array di oggetti objArray in un array di SOLO NOMI di PRODUTTORI
+
+const brandsArray = objArray.map((car) => {
+  // car è sempre l'oggetto macchina
+  return car.brand // stringa
+})
+
+console.log('BRANDARRAY', brandsArray)
+
+const lowerCaseArray = ['barbara', 'chiara', 'gianni']
+// voglio un nuovo array trasformato tutto in maiuscolo
+const upperCaseArray = lowerCaseArray.map((nameString) => {
+  return nameString.toUpperCase()
+})
+
+console.log(upperCaseArray)
+
+const numbersArray = [23, 54, 99, 134]
+
+const numbersPlus50 = numbersArray.map((num) => {
+  return num + 50
+})
+
+// PRO VERSION
+// const numbersPlus50_2 = numbersArray.map((num) => num + 50)
+
+console.log('numbersPlus50', numbersPlus50)
+
+// FILTER
+// .filter() crea un nuovo array di elementi FILTRATI
+// ad ogni elemento viene applicata una condizione, e solo se la condizione torna
+// TRUE l'elemento in questione farà parte dell'array "FILTRATO"
+
+// filtriamo numbersArray e teniamo solamente i valori maggiori di 100
+const above100 = numbersArray.filter((number) => {
+  // se voglio far passare solo i >100...
+  if (number > 100) {
+    return true
+  } else {
+    return false
+  }
+})
+
+console.log('above100', above100)
+
+// MAP e FILTER tornano sempre un NUOVO ARRAY!
