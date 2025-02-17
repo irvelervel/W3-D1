@@ -207,3 +207,90 @@ printManyNames(
 
 // ...names è un modo per TRASFORMARE una serie di parametri (anche di lunghezza indefinita) in
 // un ARRAY, con dentro tutti i parametri!
+
+// DESTRUCTURING di oggetti
+const myObj = {
+  brand: 'Sennheiser',
+  surround: true,
+  channels: 2,
+}
+
+// const brand = myObj.brand // 'Sennheiser'
+// const surround = myObj.surround // true
+// const channels = myObj.channels // 2
+
+const { brand, surround, channels } = myObj
+
+const myBrand = myObj.brand
+
+// brand è ora una variabile con valore 'Sennheiser'
+// surround è ora una variabile con valore true
+// channels è ora una variabile con valore 2
+
+console.log('brand', brand)
+console.log('surround', surround)
+console.log('channels', channels)
+
+// BACKTICKS ``
+// il backtick è un delimitatore di stringhe, come ' e "
+
+const str = `CIAO EPICODE`
+
+const myName = 'STEFANO'
+const myAge = 18
+
+const message = 'IO MI CHIAMO ' + myName + ' E HO ' + myAge + ' ANNI'
+console.log('message', message)
+
+const message2 = `IO MI CHIAMO ${myName} E HO ${myAge} ANNI`
+console.log('message2', message2)
+// se la stringa è delimitata con i backticks, potete iniettare delle variabili
+// o dei valori con ${nomeVariabile}
+
+// BONUS STAGE: "TEMPLATE LITERALS"
+// il backtick permette anche di "spezzare" una stringa su più righe nell'editor
+const longMessage = `
+    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+    Quasi fuga officia iusto ullam ipsum mollitia qui velit doloremque
+    repellat cumque unde dolores a veniam iure quidem sequi,
+    quia, eaque debitis.
+  `
+
+// ARROW FUNCTIONS (FUNZIONI FRECCIA)
+const myFunc1 = function (str1) {
+  // aggiungo il numero 10 alla str1
+  const result = str1 + '10'
+  return result
+}
+
+myFunc1('ciao') // "ciao10"
+
+// VERSIONE FRECCIA
+const arrowFunc = (str1) => {
+  // aggiungo il numero 10 alla str1
+  const result = str1 + '10'
+  return result
+}
+
+// sintassi più snella!
+// ...e poi ci sono piccole variazioni nel funzionamento:
+// - se la funzione si risolve in una sola riga, non servono le { }
+
+const printAName = (name) => console.log(`Mi chiamo ${name}`)
+
+// - se la funzione si risolve in una sola riga, la arrow function RITORNERÀ quel risultato
+
+const sum = function (n1, n2) {
+  console.log(this)
+  return n1 + n2
+}
+
+const arrowSum = (n1, n2) => {
+  console.log(this)
+  return n1 + n2
+}
+// arrowSum riceve due parametri e ne ritorna la somma, il tutto in una sola riga!
+// il return è IMPLICITO (senza "return" e senza graffe)
+
+// - unica differenza nel funzionamento: il diverso binding di alcune keywords, in particolare
+// la parola "this"
