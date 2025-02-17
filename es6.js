@@ -78,6 +78,8 @@ const obj1 = {
 }
 
 const obj2 = obj1 // LA DIFFERENZA È CHE OBJ1 e OBJ2 SONO OGGETTI!
+// la riga sopra NON ha creato una NUOVA VARIABILE! abbiamo semplicemente un nuovo
+// modo per accedere allo STESSO oggetto (di oggetto ce n'è uno solo!)
 
 obj2.favouriteColor = 'red'
 console.log(obj1.favouriteColor) // ??? 'blue'? NO, è RED
@@ -85,6 +87,7 @@ console.log(obj1.favouriteColor) // ??? 'blue'? NO, è RED
 //
 let x = 10
 let y = x // y prende il valore di 10
+// la riga sopra ha creato una NUOVA VARIABILE, SCOLLEGATA DA X
 
 x = 30
 console.log('y', y) // ??? 10
