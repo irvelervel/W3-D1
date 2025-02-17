@@ -67,10 +67,7 @@ const greet2 = function () {
 // di alterare per sbaglio un valore che NON intendiamo rendere modificabile, oltre che essere preferibile
 // in termini di footprint quanto possibile
 
-// SPREAD OPERATOR
-// ...
-// Lo spread operator è un nuovo operatore introdotto da ES6 che torna utile per effettuare una copia
-// delle proprietà di un oggetto
+// !! ATTENZIONE DURANTE LA CREAZIONE DI COPIE DI VARIABILI !!
 
 const obj1 = {
   name: 'Stefano',
@@ -93,3 +90,120 @@ x = 30
 console.log('y', y) // ??? 10
 
 // x vale 30, y vale 10
+
+// SPREAD OPERATOR
+// ...
+// Lo spread operator è un nuovo operatore introdotto da ES6 che torna utile per effettuare una copia
+// delle proprietà di un oggetto
+
+// Con lo SPREAD OPERATOR noi riusciamo a creare delle VERE copie di strutture dati complesse!
+
+const object1 = {
+  brand: 'Apple',
+  model: 'iPhone 6s',
+}
+
+// const object2 = object1 <-- NON CREA UNA VERA COPIA
+const object2 = {
+  ...object1, // <-- tutte le proprietà di object1
+}
+
+object2.model = 'iPhone 15 Pro'
+// NON HA CAMBIATO IL MODEL DI OBJECT1, sono due oggetti diversi!
+console.log(object1.model) // "iPhone 6s"
+
+// ...object1 -> RAPPRESENTA UN "copia-incolla" DI TUTTE LE COPPIE CHIAVE:VALORE DI OBJECT1
+
+const object3 = {
+  ...object1,
+  color: 'Midnight Black',
+}
+
+const fruit1 = {
+  color: 'red',
+  taste: 'strong',
+}
+
+const fruit2 = {
+  exotic: true,
+  color: 'orange',
+}
+
+const fruit3 = {
+  ...fruit1,
+  ...fruit2,
+}
+
+// quante proprietà ha fruit3? tre in tutto, perchè "color" c'è in entrambi gli oggetti e verrà riportata
+// una volta sola dentro fruit3; il valore di "color" sarà l'ULTIMO VALORE assegnatole!
+// {
+//     taste: 'strong',
+//     exotic: true,
+//     color: 'orange'
+// }
+console.log('FRUIT3', fruit3)
+
+// ARRAY & SPREAD OPERATOR
+const numbers1 = [2, 4, 6, 8, 10]
+const numbers2 = numbers1 // QUESTA NON È UNA COPIA DELL'ARRAY NUMBERS
+numbers2.pop()
+console.log(numbers1.length) // 4, avete accorciato anche numbers1 :(
+
+const num1 = [1, 3, 5, 7, 9]
+const num2 = [...num1] // QUESTA È UNA VERA E PROPRIA COPIA
+// ...num1 rappresenta TUTTI GLI ELEMENTI DI num1
+num2.pop() // rimuovo l'ultimo elemento dell'array num2
+console.log(num1.length) // 5 :)
+
+const num3 = [...numbers1, ...num1] // [2, 4, 6, 8, 1, 3, 5, 7, 9]
+console.log('9 elementi?', num3)
+
+// REST PARAMETERS
+const acceptManyStrings = function (s1, s2, s3, s4, s5, s6, s7, s8, s9, s10) {
+  // voglio fare un console.log di tutte le stringhe che ho ricevuto
+  console.log(s1)
+  console.log(s2)
+  console.log(s3)
+  console.log(s4)
+  console.log(s5)
+  console.log(s6)
+  console.log(s7)
+  console.log(s8)
+  console.log(s9)
+  console.log(s10)
+}
+
+acceptManyStrings('stefano', 'gianmarco', 'topogigio', 'fedez')
+acceptManyStrings('giuseppe', 'loretta', 'carloconti', 'alessia', 'ollie')
+acceptManyStrings(
+  'giuseppe',
+  'loretta',
+  'carloconti',
+  'alessia',
+  'ollie',
+  'giorgia'
+)
+
+// ...ecco una maniera che invece funziona sempre:
+const printManyNames = function (...names) {
+  // ...names si chiamano "REST PARAMETERS"
+  // ora "names" è un ARRAY con TUTTI i parametri dentro!
+  // console.logga tutti i parametri
+  for (let i = 0; i < names.length; i++) {
+    console.log(names[i])
+  }
+}
+
+printManyNames('stefano', 'gianmarco', 'topogigio', 'fedez')
+printManyNames(
+  'giuseppe',
+  'loretta',
+  'carloconti',
+  'alessia',
+  'ollie',
+  'rose',
+  'brunorisas'
+)
+
+// ...names è un modo per TRASFORMARE una serie di parametri (anche di lunghezza indefinita) in
+// un ARRAY, con dentro tutti i parametri!
